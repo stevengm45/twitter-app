@@ -15,3 +15,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.btn {
+  box-shadow: none !important;
+}
+
+.btn.btn-primary {
+  background-color: $primary;
+  border-color: $primary;
+  &:hover {
+    background-color: white;
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+.btn.btn-outline-primary {
+  border-color: $border-primary;
+  color: $primary;
+  &:hover, &:active {
+    background-color: rgba(85,172,238,255) !important;
+    border-color: $primary;
+  };
+  
+}
+
+input.form-control {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 25px;
+  padding: 10px 15px;
+
+}

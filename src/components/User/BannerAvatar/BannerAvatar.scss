@@ -1,0 +1,44 @@
+@import "../../../scss/index.scss";
+
+.banner-avatar {
+    position: relative;
+    background-color: $background-dark-light;
+    height: 220px;
+    margin-bottom: 60px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .avatar {
+        position: absolute;
+        bottom: -50px;
+        left: 20px;
+        background-color: $background-dark-light;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 5px solid white;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .options {
+        position: absolute;
+        bottom: -50px;
+        right: 15px;
+
+        button {
+            border-radius: 50px;
+            background-color: $primary;
+            width: 150px;
+
+            &:hover {
+                background-color: white;
+                color: black;
+                border: 2px solid black;
+
+            }
+        }
+    }
+}
