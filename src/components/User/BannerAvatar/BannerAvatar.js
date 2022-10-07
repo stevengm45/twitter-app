@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from 'react-bootstrap';
 import { API_HOST } from '../../../utils/constant';
+import ConfigModal from '../../Modal/ConfigModal';
 import "./BannerAvatar.scss"
 
 export default function BannerAvatar(props) {
     const { user, loggedUser } = props;
+    const [showModal, setShowModal] = useState(false)
 
     const bannerUrl = user?.banner ? `${API_HOST}/obtenerBanner?id=${user.id}` : null;
 
@@ -23,12 +25,14 @@ export default function BannerAvatar(props) {
 
             {user && (
                 <div className='options'>
-                    { loggedUser._id === user.id && <Button>Editar perfil</Button> }
+                    { loggedUser._id === user.id && <Button onClick={() => setShowModal(true)}>Editar perfil</Button> }
                     {loggedUser._id !== user.id && <Button>Seguir</Button>}
                 </div>
                 
             )}
-            
+            <ConfigModal show={showModal} setShow={setShowModal} title="Editar perfil">
+                Editar perfil
+            </ConfigModal>
         </div>
     )
 }
