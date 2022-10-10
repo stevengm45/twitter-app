@@ -1,14 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useCallBack } from 'react'
 import { Form, Col, Row, Button } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
+import es from "date-fns/locale/es"
+import { useDropzone } from "react-dropzone"
+import { API_HOST } from "../../../utils/constant"
 
 import "./EditUserForm.scss"
 
 export default function EditUserForm(props) {
 
     const { user, setShowModal } = props
-
     const [ formData, setFormData ] = useState(initialValue(user))
+    const [bannerUrl, setstate] = useState(
+        user?.banner ? `${API_HOST}/obtenerBanner?id=${user.id}`: null
+    );
+
+    const onDropBanner = useCallBack(acceptedFile => {
+
+    })
+
+    const {
+        getRootPage: getRootBannerProps,
+        getInputProps: getInputBannerProps
+    } = useDropzone({
+        accept:"image/jpeg, image/png",
+        noKayboard: true,
+        multiple: false,
+        onDrop: onDropBanner
+    })
 
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -20,6 +39,13 @@ export default function EditUserForm(props) {
     }
     return (
         <div className='edit-user-form'>
+            <div
+                className="banner" 
+                style={{ backgroundImage: `url('${bannerUrl}')` }}
+                {...getRootBannerProps()}
+            >
+                <input {...getInputBannerProps()} />
+            </div>
             <Form onSubmit={onSubmit}>
                 <Form.Group>
                     <Row>
@@ -70,6 +96,7 @@ export default function EditUserForm(props) {
                 <Form.Group>
                     <DatePicker 
                         placeholder="Fecha de nacimiento"
+                        locale={es}
                         selected={new Date(formData.fechaNacimiento)}
                         onChange={value => 
                             setFormData({ ...formData, fechaNacimiento: value })
