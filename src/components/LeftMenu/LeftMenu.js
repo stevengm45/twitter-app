@@ -12,7 +12,6 @@ export default function LeftMenu(props) {
     const { setRefreshCheckLogin } = props
 
     const user = useAuth()
-    console.log(user)
 
     const logout = () => {
         logoutApi();

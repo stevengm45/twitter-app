@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.scss';
 import "bootstrap/dist/css/bootstrap.min.css"
 import 'react-toastify/dist/ReactToastify.css';
+import "react-datepicker/dist/react-datepicker.css"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

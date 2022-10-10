@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button } from 'react-bootstrap';
 import { API_HOST } from '../../../utils/constant';
 import ConfigModal from '../../Modal/ConfigModal';
+import EditUserForm from '../EditUserForm';
 import "./BannerAvatar.scss"
 
 export default function BannerAvatar(props) {
@@ -30,8 +31,12 @@ export default function BannerAvatar(props) {
                 </div>
                 
             )}
-            <ConfigModal show={showModal} setShow={setShowModal} title="Editar perfil">
-                Editar perfil
+            <ConfigModal
+                show={showModal}
+                setShow={setShowModal}
+                title="Editar perfil"
+            >
+                <EditUserForm user={user} setShowModal={setShowModal} />
             </ConfigModal>
         </div>
     )
