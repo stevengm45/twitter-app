@@ -29,7 +29,7 @@ export function uploadBannerApi(file) {
     formData.append("banner", file)
 
     const params = {
-        methos: "POST",
+        method: "POST",
         headers: {
             Authorization: `Bearer ${getTokenApi()}`
         },
@@ -55,7 +55,7 @@ export function uploadAvatarApi(file) {
     formData.append("avatar", file)
 
     const params = {
-        methos: "POST",
+        method: "POST",
         headers: {
             Authorization: `Bearer ${getTokenApi()}`
         },
