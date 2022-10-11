@@ -18,6 +18,12 @@ export default function EditUserForm(props) {
 
     const [ bannerFile, setBannerFile ] = useState(null);
 
+    const [ avatarUrl, setAvatarUrl ] = useState(
+        user?.avatar ? `${API_HOST}/obtenerAvatar?id=${user.id}`: null
+    );
+    const [ avatarFile, setAvatarFile ] = useState(null);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const onDropBanner = useCallback(acceptedFile => {
         const file = acceptedFile[0]
         setBannerUrl(URL.createObjectURL(file));
@@ -33,6 +39,23 @@ export default function EditUserForm(props) {
         multiple: false,
         onDrop: onDropBanner,
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const onDropAvatar = useCallback(acceptedFile => {
+        const file = acceptedFile[0]
+        setAvatarUrl(URL.createObjectURL(file));
+        setAvatarFile(file);
+    })
+
+    const {
+        getRootProps: getRootAvatarProps,
+        getInputProps: getInputAvatarProps
+    } = useDropzone({
+        accept: "image/jpeg, image/png",
+        noKeyboard: true,
+        multiple: false,
+        onDrop: onDropAvatar
+    })
 
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -50,6 +73,15 @@ export default function EditUserForm(props) {
                 {...getRootBannerProps()}
             >
                 <input {...getInputBannerProps()} />
+                <Camara />
+            </div>
+
+            <div
+                className="avatar" 
+                style={{ backgroundImage: `url('${avatarUrl}')` }}
+                {...getRootAvatarProps()}
+            >
+                <input {...getInputAvatarProps()} />
                 <Camara />
             </div>
             <Form onSubmit={onSubmit}>
