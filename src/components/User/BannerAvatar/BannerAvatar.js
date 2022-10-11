@@ -4,12 +4,13 @@ import { API_HOST } from '../../../utils/constant';
 import ConfigModal from '../../Modal/ConfigModal';
 import EditUserForm from '../EditUserForm';
 import "./BannerAvatar.scss"
-import { checkFollowApi } from "../../../api/follow";
+import { checkFollowApi, followUserApi, unfollowUserApi } from "../../../api/follow";
 
 export default function BannerAvatar(props) {
     const { user, loggedUser } = props;
     const [showModal, setShowModal] = useState(false)
     const [ following, setFollowing ] = useState(false)
+    const [ reloadFollow, setReloadFollow ] = useState(false);
 
     const bannerUrl = user?.banner ? `${API_HOST}/obtenerBanner?id=${user.id}` : null;
 
@@ -18,14 +19,29 @@ export default function BannerAvatar(props) {
         : <img src='https://res.cloudinary.com/dainl1ric/image/upload/v1665178079/usernolog_xxdhpn.jpg' alt=''/>;
 
     useEffect(() => {
-        checkFollowApi(user?.id).then(response => {
-            if(response?.status) {
-                setFollowing(true);
-            } else {
-                setFollowing(false);
-            }
+        if(user) {
+            checkFollowApi(user?.id).then(response => {
+                if(response?.status) {
+                    setFollowing(true);
+                } else {
+                    setFollowing(false);
+                }
+            });
+            setReloadFollow(false);
+        }
+    }, [user, reloadFollow])
+
+    const onFollow = () => {
+        followUserApi(user.id).then(() => {
+            setReloadFollow(true);
         })
-    }, [user])
+    }
+
+    const onUnFollow = () => {
+        unfollowUserApi(user.id).then(() => {
+            setReloadFollow(true);
+        })
+    }
     
     return (
         <div 
@@ -42,8 +58,13 @@ export default function BannerAvatar(props) {
                     
                     { loggedUser._id !== user.id && (
                         following !== null && (
-                            (following ? <Button>Siguiendo</Button> : <Button>Seguir</Button>)
-                        )
+                            (following ? (
+                                <Button onClick={onUnFollow} className="unfollow">
+                                    <span>Siguiendo</span>
+                                </Button>
+                            ) : (
+                                <Button onClick={onFollow}>Seguir</Button>)
+                        ))
                     )}
                 </div>
                 

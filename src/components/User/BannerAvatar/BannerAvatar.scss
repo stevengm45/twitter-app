@@ -39,6 +39,22 @@
                 border: 2px solid black;
 
             }
+
+            &.unfollow{
+                &:hover {
+                    color: $danger;
+                    background-color: rgb(229, 190, 190);
+                    border: 2px solid $danger;
+
+                    &::before {
+                        content: "Dejar de seguir"
+                    }
+
+                    span {
+                        display: none;
+                    }
+                }
+            }
         }
     }
 }
