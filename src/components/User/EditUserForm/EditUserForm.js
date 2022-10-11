@@ -5,8 +5,10 @@ import es from "date-fns/locale/es"
 import { useDropzone } from "react-dropzone"
 import { API_HOST } from "../../../utils/constant"
 import { Camara } from "../../../utils/Icons"
+import { uploadBannerApi, uploadAvatarApi, updateInfoApi } from "../../../api/user"
 
 import "./EditUserForm.scss"
+import { toast } from 'react-toastify';
 
 export default function EditUserForm(props) {
 
@@ -63,7 +65,25 @@ export default function EditUserForm(props) {
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log(formData)
+
+        if(bannerFile){
+            uploadBannerApi(bannerFile).catch(() => {
+                toast.error("Error al subir el nuevo banner")
+            })
+        }
+
+        if(avatarFile){
+            uploadAvatarApi(avatarFile).catch(() => {
+                toast.error("Error al subir el nuevo avatar")
+            })
+        }
+
+        updateInfoApi(formData).then(() => {
+            setShowModal(false);
+        })
+        .catch(() => {
+            toast.error("Error al actualizar los datos");
+        })
     }
     return (
         <div className='edit-user-form'>
