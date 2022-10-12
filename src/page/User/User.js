@@ -14,7 +14,7 @@ import { Button } from 'react-bootstrap'
 import { Spinner } from 'react-bootstrap'
 
 export default function User(props) {
-
+    const { setRefreshCheckLogin } = props
     const { id } = useParams();
     const [ user, setUser ] = useState(null);
     const [ tweets, setTweets ] = useState(null);
@@ -58,7 +58,7 @@ export default function User(props) {
     }
 
     return (
-        <BasicLayout className="user">
+        <BasicLayout className="user" setRefreshCheckLogin={setRefreshCheckLogin}>
             <div className="user__title">
                 <h2>
                     {user ? `${user.nombre} ${user.apellidos}` : "Usuario no existe"}</h2>            
