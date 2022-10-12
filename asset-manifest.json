@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/twitter-app/static/css/main.692b46a8.css",
+    "main.js": "/twitter-app/static/js/main.838db361.js",
+    "static/js/787.f649083d.chunk.js": "/twitter-app/static/js/787.f649083d.chunk.js",
+    "static/media/error-404.jpg": "/twitter-app/static/media/error-404.97db9684ac8295f77e65.jpg",
+    "static/media/calendar.svg": "/twitter-app/static/media/calendar.b252ffaa17291b7d668e71a5c56aa205.svg",
+    "static/media/camara.svg": "/twitter-app/static/media/camara.d25775caaa8291a151822bb7942f88aa.svg",
+    "static/media/link.svg": "/twitter-app/static/media/link.e447044d44368d97ff6c21231ac1e6bf.svg",
+    "static/media/location.svg": "/twitter-app/static/media/location.94d5978e7e0840c8dfc6ce3e2f195798.svg",
+    "static/media/close.svg": "/twitter-app/static/media/close.da5c42223be72e07b42078ba244d26c0.svg",
+    "index.html": "/twitter-app/index.html",
+    "main.692b46a8.css.map": "/twitter-app/static/css/main.692b46a8.css.map",
+    "main.838db361.js.map": "/twitter-app/static/js/main.838db361.js.map",
+    "787.f649083d.chunk.js.map": "/twitter-app/static/js/787.f649083d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.692b46a8.css",
+    "static/js/main.838db361.js"
+  ]
+}
