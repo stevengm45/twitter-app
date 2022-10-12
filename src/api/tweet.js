@@ -1,11 +1,11 @@
 import { API_HOST } from "../utils/constant";
 import { getTokenApi } from "./auth";
 
-export function addTweetApi(mensaje) {
+export function addTweetApi(mensaje){
     const url = `${API_HOST}/tweet`;
     const data = {
-        mensaje,
-    };
+        mensaje
+    }
 
     const params = {
         method: "POST",
@@ -17,15 +17,15 @@ export function addTweetApi(mensaje) {
     };
 
     return fetch(url, params)
-        .then((response) => {
-            if (response.status >= 200 && response.status < 300) {
+        .then(response => {
+            if(response.status >= 200 & response.status < 300) {
                 return { code: response.status, message: "Tweet enviado." };
             }
-            return { code: 500, message: "Error del servidor." };
+            return { code: 500, message: "Error en el servidor"};
         })
         .catch((err) => {
             return err;
-        });
+        })
 }
 
 export function getUserTweetsApi(idUser, page) {
@@ -34,15 +34,18 @@ export function getUserTweetsApi(idUser, page) {
     const params = {
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getTokenApi()}`,
-        },
-    };
+            Authorization: `Bearer ${getTokenApi()}`
+        }
+    }
 
     return fetch(url, params)
-        .then((response) => {
-            return response.json();
+        .then(response => {
+            return response.json()
         })
-        .catch((err) => {
+        .then(result => {
+            return result;
+        })
+        .catch( err => {
             return err;
-        });
+        })
 }

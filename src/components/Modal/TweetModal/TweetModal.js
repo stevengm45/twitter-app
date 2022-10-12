@@ -1,36 +1,35 @@
-import React, { useState } from 'react'
-import { Button, Form, Modal } from 'react-bootstrap';
-import classNames from "classnames"
-import { Close } from "../../../utils/Icons"
-import { addTweetApi } from '../../../api/tweet';
+import React, { useState } from "react";
+import { Modal, Form, Button } from "react-bootstrap";
+import classNames from "classnames";
+import { toast } from "react-toastify";
+import { Close } from "../../../utils/Icons";
+import { addTweetApi } from "../../../api/tweet";
 
-import "./TweetModal.scss"
-import { toast } from 'react-toastify';
+import "./TweetModal.scss";
 
 export default function TweetModal(props) {
-
     const { show, setShow } = props;
-    const [ message, setMessage ] = useState("")
-    const maxLength = 280
+    const [message, setMessage] = useState("");
+    const maxLength = 280;
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         e.preventDefault();
 
-        if(message.length > 0 && message.length <= maxLength) {
+        if (message.length > 0 && message.length <= maxLength) {
             addTweetApi(message)
-                .then(response => {
+                .then((response) => {
                     console.log(response);
-                    if(response?.code >= 200 && response?.code < 300) {
+                    if (response?.code >= 200 && response?.code < 300) {
                         toast.success(response.message);
                         setShow(false);
-                        window.location.reload()
+                        window.location.reload();
                     }
                 })
                 .catch(() => {
-                    toast.warning("Error al enviar el tweet.")
-                })
+                    toast.warning("Erorr al enviar el tweet, inténtelo más tarde.");
+                });
         }
-    }
+    };
 
     return (
         <Modal
@@ -50,25 +49,24 @@ export default function TweetModal(props) {
                     <Form.Control
                         as="textarea"
                         rows="6"
-                        placeholder="¿Que estas pensando?"
-                        onChange={e => setMessage(e.target.value) }
+                        placeholder="¿Qué está pensando?"
+                        onChange={(e) => setMessage(e.target.value)}
                     />
                     <span
                         className={classNames("count", {
-                            error:message.length > maxLength,
+                            error: message.length > maxLength,
                         })}
                     >
                         {message.length}
                     </span>
                     <Button
                         type="submit"
-                        disabled={message.length > maxLength || message.length < 1}    
+                        disabled={message.length > maxLength || message.length < 1}
                     >
-                        Twittear
+                        Tweet
                     </Button>
                 </Form>
             </Modal.Body>
         </Modal>
-
-    )
+    );
 }
