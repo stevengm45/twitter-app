@@ -13,36 +13,38 @@ import "./User.scss"
 
 export default function User(props) {
 
+    //const { match, setRefreshCheckLogin } = props;
     const { id } = useParams();
-    const [ user, setUser ] = useState(null);
-    const [ tweets, setTweets ] = useState(null)
+    const [user, setUser] = useState(null);
+    const [tweets, setTweets] = useState(null);
+
     const loggedUser = userAuth()
 
     useEffect(() => {
         getUserApi(id)
-        .then(response => {
-            if(!response) toast.error("El usuario que has visitado no existe");
-            setUser(response)
-        }).catch(() => {
-            toast.error("El usuario que has visitado no existe")
-        })
+            .then(response => {
+                if (!response) toast.error("El usuario que has visitado no existe");
+                setUser(response)
+            }).catch(() => {
+                toast.error("El usuario que has visitado no existe")
+            })
     });
 
     useEffect(() => {
         getUserTweetsApi(id, 1)
-            .then(response => {
+            .then((response) => {
                 setTweets(response);
             })
             .catch(() => {
-                setTweets([])
-            })
-    })
+                setTweets([]);
+            });
+    });
 
     return (
         <BasicLayout className="user">
             <div className="user__title">
                 <h2>
-                    {user ? `${user.nombre} ${user.apellidos}` : "Usuario no existe"}</h2>            
+                    {user ? `${user.nombre} ${user.apellidos}` : "Usuario no existe"}</h2>
             </div>
             <BannerAvatar user={user} loggedUser={loggedUser} />
             <InfoUser user={user} />

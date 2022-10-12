@@ -1,7 +1,7 @@
 import { API_HOST } from "../utils/constant";
 import { getTokenApi } from "./auth";
 
-export function getUserApi(id){
+export function getUserApi(id) {
     const url = `${API_HOST}/verperfil?id=${id}`;
 
     const params = {
@@ -9,15 +9,18 @@ export function getUserApi(id){
             "Content-Type": "application/json",
             Authorization: `Bearer ${getTokenApi()}`
         }
-    }
+    };
 
     return fetch(url, params)
         .then(response => {
-            if(response.status >= 400) throw null
-            return response.json()
-        }).then(result => {
+            // eslint-disable-next-line no-throw-literal
+            if (response.status >= 400);
+            return response.json();
+        })
+        .then(result => {
             return result;
-        }).catch(err => {
+        })
+        .catch(err => {
             return err;
         });
 }
@@ -26,7 +29,7 @@ export function uploadBannerApi(file) {
     const url = `${API_HOST}/subirBanner`;
 
     const formData = new FormData();
-    formData.append("banner", file)
+    formData.append("banner", file);
 
     const params = {
         method: "POST",
@@ -34,7 +37,7 @@ export function uploadBannerApi(file) {
             Authorization: `Bearer ${getTokenApi()}`
         },
         body: formData
-    }
+    };
 
     return fetch(url, params)
         .then(response => {
@@ -45,14 +48,14 @@ export function uploadBannerApi(file) {
         })
         .catch(err => {
             return err;
-        })
+        });
 }
 
 export function uploadAvatarApi(file) {
     const url = `${API_HOST}/subirAvatar`;
 
     const formData = new FormData();
-    formData.append("avatar", file)
+    formData.append("avatar", file);
 
     const params = {
         method: "POST",
@@ -60,7 +63,7 @@ export function uploadAvatarApi(file) {
             Authorization: `Bearer ${getTokenApi()}`
         },
         body: formData
-    }
+    };
 
     return fetch(url, params)
         .then(response => {
@@ -71,7 +74,7 @@ export function uploadAvatarApi(file) {
         })
         .catch(err => {
             return err;
-        })
+        });
 }
 
 export function updateInfoApi(data) {
@@ -91,5 +94,5 @@ export function updateInfoApi(data) {
         })
         .catch(err => {
             return err;
-        })
+        });
 }
