@@ -10,12 +10,16 @@ import ListTweets from '../../components/ListTweets'
 import { getUserTweetsApi } from '../../api/tweet'
 
 import "./User.scss"
+import { Button } from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap'
 
 export default function User(props) {
 
     const { id } = useParams();
     const [ user, setUser ] = useState(null);
-    const [ tweets, setTweets ] = useState(null)
+    const [ tweets, setTweets ] = useState(null);
+    const { page, setPage } = useState(1)
+    const [ loadingTweets, setLoadingTweets ] = useState(false)
     const loggedUser = userAuth()
 
     useEffect(() => {
@@ -38,6 +42,21 @@ export default function User(props) {
             })
     })
 
+    const moreData = () => {
+        const pageTemp = page + 1;
+        setLoadingTweets(true);
+
+        getUserTweetsApi(id, pageTemp).then(response => {
+            if(!response) {
+                setLoadingTweets(0);
+            } else {
+                setTweets([...tweets, ...response]);
+                setPage(pageTemp);
+                setLoadingTweets(false)
+            }
+        })
+    }
+
     return (
         <BasicLayout className="user">
             <div className="user__title">
@@ -48,6 +67,19 @@ export default function User(props) {
             <InfoUser user={user} />
             <div className="user__tweets">
                 {tweets && <ListTweets tweets={tweets} />}
+                <Button onClick={moreData}>
+                    {!loadingTweets ? (
+                        loadingTweets !== 0 && 'Ver mas tweets'
+                    ) : (
+                        <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            arian-hidden="true"
+                        />
+                    )}
+                </Button>
             </div>
         </BasicLayout>
     )

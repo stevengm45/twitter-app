@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Error404 from "../page/Error404";
 import Home from "../page/Home";
 import User from "../page/User";
+import Users from "../page/Users";
 
 
 export default function Routing(props) {
@@ -15,10 +16,11 @@ export default function Routing(props) {
         <Routes>
             <Route path="/" element={<Home />} />
             {/* <Route index element={<Home />} /> */}
-            <Route path='*' element={<Error404 />} />
+            <Route path='/users' element={<Users />} />
             <Route path='/:id' element={<User />} />
-
+            <Route path='*' element={<Error404 />} />
         </Routes>
     </BrowserRouter>
     );
 }
+

@@ -10,7 +10,7 @@
         height: 100hv;
         overflow-y: scroll;
         padding: 0 !important;
-        border-right: 1px solid $border-grey;
+        border-right: 1px solid lightgray;
         &::-webkit-scrollbar {
             display: none;
         }
