@@ -6,6 +6,7 @@ import BasicLayout from '../../layout/BasicLayout'
 import BannerAvatar from '../../components/User/BannerAvatar'
 import userAuth from '../../hooks/useAuth'
 import InfoUser from '../../components/User/InfoUser'
+import ListTweets from '../../components/ListTweets'
 import { getUserTweetsApi } from '../../api/tweet'
 
 import "./User.scss"
@@ -45,7 +46,9 @@ export default function User(props) {
             </div>
             <BannerAvatar user={user} loggedUser={loggedUser} />
             <InfoUser user={user} />
-            <div className="user__tweets">Lista de tweets</div>
+            <div className="user__tweets">
+                {tweets && <ListTweets tweets={tweets} />}
+            </div>
         </BasicLayout>
     )
 }
