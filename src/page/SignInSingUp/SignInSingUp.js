@@ -46,18 +46,6 @@ function LeftComponent(){
     return(
         <Col className="signin-signup__left" xs={6}>
             <img src='https://res.cloudinary.com/dainl1ric/image/upload/v1664857040/iconoblancotwitter_ia1fib.png' alt='icon-twitter'/>
-            <div>
-                <h2>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </h2>
-                <h2>
-                    <FontAwesomeIcon icon={faUser} />
-                </h2>
-                <h2>
-                    <FontAwesomeIcon icon={faComment} />
-                </h2>
-                
-            </div>
         </Col>
     )
 }
